@@ -156,7 +156,7 @@ def Search():
         RenderText.insert(INSERT, "====================")
         RenderText.insert(INSERT, "\n")
         RenderText.insert(INSERT, "기관질병 발생 위험도")
-        RenderText.insert(INSERT, "\n")
+        RenderText.insert(INSERT, "\n\n")
         print(WeatherData)
         for x in range(9):
             if len(WeatherData[x]) == 3:
@@ -178,7 +178,7 @@ def Search():
         RenderText.insert(INSERT, "====================")
         RenderText.insert(INSERT, "\n")
         RenderText.insert(INSERT, "뇌졸증 발생 위험도")
-        RenderText.insert(INSERT, "\n")
+        RenderText.insert(INSERT, "\n\n")
         RenderText.insert(INSERT, "오늘 - " + WeatherView[3])
         RenderText.insert(INSERT, "\n")
         RenderText.insert(INSERT, "내일 - " + WeatherView[4])
@@ -188,7 +188,7 @@ def Search():
         RenderText.insert(INSERT, "====================")
         RenderText.insert(INSERT, "\n")
         RenderText.insert(INSERT, "피부질환 발생 위험도")
-        RenderText.insert(INSERT, "\n")
+        RenderText.insert(INSERT, "\n\n")
         RenderText.insert(INSERT, "오늘 - " + WeatherView[6])
         RenderText.insert(INSERT, "\n")
         RenderText.insert(INSERT, "내일 - " + WeatherView[7])
@@ -201,23 +201,32 @@ def Search():
     except:
         canvas.create_text(70, 80, text="불러오기 오류", font=TempFont)
 
-    if '2' <= WeatherData[0][3] <= '3':
-        top = Toplevel(window, bd=2)
-        top.title("알림")
-        label = Label(top, text="기관지 질병 주의! 마스크 착용바람")
-        label.pack()
+    try:
+        if '2' <= WeatherData[0][3] <= '3':
+            top = Toplevel(window, bd=2)
+            top.title("기관지 주의")
+            label = Label(top, text="기관지 질병 주의! 마스크 착용바람", bg='red',fg='white')
+            label.pack()
+    except:
+        pass
 
-    if '2' <= WeatherData[3][3] <= '3':
-        top = Toplevel(window, bd=2)
-        top.title("알림")
-        label = Label(top, text="뇌졸증 질환 주의!")
-        label.pack()
+    try:
+        if '2' <= WeatherData[3][3] <= '3':
+            top = Toplevel(window, bd=2)
+            top.title("뇌졸증 주의")
+            label = Label(top, text="뇌졸증 질환 주의!", bg='red',fg='white')
+            label.pack()
+    except:
+        pass
 
-    if '2' <= WeatherData[6][3] <= '3':
-        top = Toplevel(window, bd=2)
-        top.title("알림")
-        label = Label(top, text="피부 질환 주의! 선크림 휴대 요망")
-        label.pack()
+    try:
+        if '2' <= WeatherData[6][3] <= '3':
+            top = Toplevel(window, bd=2)
+            top.title("피부 질환 주의")
+            label = Label(top, text="피부 질환 주의! 선크림 휴대 요망",bg='red',fg='white')
+            label.pack()
+    except:
+        pass
 
 
 def Asthma():
@@ -386,7 +395,7 @@ mapphoto = PhotoImage(file='map.png')
 canvas = Canvas(window, width=800, height=800)
 canvas.pack()
 canvas.place(x=700)
-canvas.create_text(80, 20, text="[전국 미세먼지]", font=TempFont)
+canvas.create_text(133, 20, text="[전국 미세먼지](범위 한달)", font=TempFont)
 canvas.create_image(200, 250, image=mapphoto)
 canvas.create_text(50, 60, text=DustTime, font=TempFont)
 
